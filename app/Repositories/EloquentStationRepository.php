@@ -54,7 +54,7 @@ class EloquentStationRepository implements StationRepositoryInterface
             $stations =$this->city->getCityStations($cityName);
         }
         else{
-            return $this->station->all();
+            $stations =  $this->station->all();
         }
 
         if($status!=null){

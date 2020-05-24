@@ -63,8 +63,8 @@ class StationController extends Controller
         $station = $this->station->getClosest($measure,$requestPosition);
 
         return response()->json([
-            'duration' => $station->duration,
-            'distance' => $station->distance,
+            'measure' => $measure,
+            'value' => $station->key->value,
             'station'=>new StationResource($station)
         ],200);
     }
