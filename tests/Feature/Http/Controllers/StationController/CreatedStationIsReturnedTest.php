@@ -13,7 +13,6 @@ class CreatedStationIsReturnedTest extends TestCase
 
     public function testCreatedStationIsReturned()
     {
-        $this->withoutMiddleware();
         $response = $this->postJson('/stations', [
             'position'=>[
                 'latitude' => 34.2,

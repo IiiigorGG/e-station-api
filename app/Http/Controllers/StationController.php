@@ -15,6 +15,7 @@ use App\Repositories\Interfaces\StationRepositoryInterface;
 use App\Station;
 use Illuminate\Http\Request;
 use App\Http\Resources\Station as StationResource;
+use Illuminate\Routing\Controller;
 use phpDocumentor\Reflection\Types\This;
 use PhpParser\Comment;
 
@@ -34,7 +35,6 @@ class StationController extends Controller
 
     public function store(StationStoreRequest $request)
     {
-        error_log('here');
         $city =$this->city->getOrCreate($request->input('city'));
         $station = $this->station->saveWithRelations($city,$request->input('position'));
 
@@ -48,7 +48,7 @@ class StationController extends Controller
     {
         $status = $request->query('status', null);
         $city = $request->query('city', null);
-
+        error_log($status);
         return response()->json([
             'stations'=>StationResource::collection($this->station->showRequested($city,$status))
         ],200);
@@ -59,12 +59,11 @@ class StationController extends Controller
     {
         $requestPosition = $this->position->parsePosition($request->query('position'));
         $measure = $request->query('measure','direct_distance');
-
+        error_log('here');
         $station = $this->station->getClosest($measure,$requestPosition);
-
         return response()->json([
-            'duration' => $station->duration,
-            'distance' => $station->distance,
+            'measure'=>$measure,
+            'value'=> $station->key->value,
             'station'=>new StationResource($station)
         ],200);
     }
@@ -85,7 +84,6 @@ class StationController extends Controller
 
     public function delete(Station $station)
     {
-        error_log('step1');
         $this->station->deleteAndCheckCity($station);
 
         return response('',204);

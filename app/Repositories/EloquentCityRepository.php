@@ -35,7 +35,7 @@ class EloquentCityRepository implements CityRepositoryInterface
         $this->city->find($city->id)->delete();
     }
 
-    public function getCityStation($cityName)
+    public function getCityStations($cityName)
     {
         $city =  $this->city->where('name',$cityName)->first();
 

@@ -18,7 +18,6 @@ class cityIsNotDuplicatedTest extends TestCase
 
     public function testCityIsNotDuplicated()
     {
-        $this->withoutMiddleware();
         $city = factory(City::class)->create(['name'=>'odesa']);
         $position = factory(Position::class)->make([
             'latitude'=>34.2,

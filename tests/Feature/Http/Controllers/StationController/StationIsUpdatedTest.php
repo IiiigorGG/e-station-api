@@ -19,7 +19,6 @@ class stationIsUpdatedTest extends TestCase
 
     public function testStationIsUpdated()
     {
-        $this->withoutMiddleware();
         $city = factory(City::class)->create(['name'=>'Odesa']);
         $position = factory(Position::class)->make([
             'latitude'=>34.2,

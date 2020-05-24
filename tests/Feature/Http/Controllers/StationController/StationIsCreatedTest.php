@@ -18,7 +18,6 @@ class stationIsCreatedTest extends TestCase
 
     public function testStationIsCreated()
     {
-        $this->withoutMiddleware();
         $this->instance(EloquentStationRepository::class, Mockery::mock(EloquentStationRepository::class, function ($mock) {
             $mock->shouldReceive('saveWithRelations')->once();
         }));

@@ -10,8 +10,6 @@ use App\Repositories\Interfaces\CityRepositoryInterface;
 use App\Repositories\Interfaces\PositionRepositoryInterface;
 use App\Repositories\Interfaces\StationRepositoryInterface;
 use App\Services\DirectDistanceMeasureService;
-use App\Services\RouteLengthMeasureService;
-use App\Services\TimeSpentMeasureService;
 use App\Station;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -51,10 +49,10 @@ class EloquentStationRepository implements StationRepositoryInterface
     public function showRequested($cityName, $status)
     {
         if($cityName!=null){
-            $stations =$this->city->getCityStations($cityName);
+            $stations = $this->city->getCityStations($cityName);
         }
         else{
-            return $this->station->all();
+            $stations = $this->station->all();
         }
 
         if($status!=null){
@@ -83,15 +81,10 @@ class EloquentStationRepository implements StationRepositoryInterface
 
     public function deleteAndCheckCity($station)
     {
-        error_log('step2');
-
         $station->position->delete();
         $station->delete();
 
-
         if(count($station->city->stations)==0) {
-            error_log('step3');
-
             $this->city->delete($station->city);
         }
     }
@@ -115,12 +108,6 @@ class EloquentStationRepository implements StationRepositoryInterface
         switch ($measure){
             case 'direct_distance':
                 return new DirectDistanceMeasureService();
-                break;
-            case 'route_length':
-                return new RouteLengthMeasureService();
-                break;
-            case 'time_spent':
-                return new TimeSpentMeasureService();
                 break;
         }
     }

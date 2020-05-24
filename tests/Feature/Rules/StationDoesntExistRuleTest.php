@@ -15,7 +15,6 @@ class StationDoesntExistRuleTest extends TestCase
 
     public function testStationDoesntExistRulePasses()
     {
-        $this->withoutMiddleware();
         $rule = new StationDoesntExist();
         $this->assertTrue($rule->passes('test',[
             'latitude' => 34.2,

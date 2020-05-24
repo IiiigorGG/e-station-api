@@ -17,26 +17,9 @@ class NecessaryCityIsNotDeletedTest extends TestCase
 {
     use RefreshDatabase;
 
-    /*  I created and authenticated user in this particular
-     2 tests because when disabling middleware, station
-     is not deleted. I dont now why it happens.*/
 
     public function testNecessaryCityIsNotDeleted()
     {
-        //$this->withoutMiddleware();
-
-        Artisan::call('passport:install');
-        $this->postJson('/auth/register', [
-            'name' => 'igor',
-            'email' => 'example@example.com',
-            'password' => 'password',
-            'password_confirmation'=>'password'
-        ]);
-
-        $response = $this->postJson('/auth/login', [
-            'email' => 'example@example.com',
-            'password' => 'password'
-        ]);
 
         $city = factory(City::class)->create(['name'=>'Lviv']);
 
@@ -48,7 +31,7 @@ class NecessaryCityIsNotDeletedTest extends TestCase
             $mock->shouldNotReceive('delete');
         }));
 
-        $response = $this->delete('stations/1?token=' . $response->json('token'));
+        $response = $this->delete('stations/1');
 
     }
 }

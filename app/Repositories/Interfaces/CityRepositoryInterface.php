@@ -11,5 +11,5 @@ interface CityRepositoryInterface
 
     public function delete($city);
 
-    public function getCityStation($cityName);
+    public function getCityStations($cityName);
 }

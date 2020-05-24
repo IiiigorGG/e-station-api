@@ -18,7 +18,6 @@ class stationIsDeletedTest extends TestCase
 
     public function testStationIsDeleted()
     {
-        $this->withoutMiddleware();
         $city = factory(City::class)->create(['name'=>'Odesa']);
         $position = factory(Position::class)->make([
             'latitude'=>34.2,

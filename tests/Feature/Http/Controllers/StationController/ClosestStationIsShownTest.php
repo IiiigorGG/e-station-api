@@ -20,7 +20,6 @@ class ClosestStationIsShownTest extends TestCase
 
     public function testClosestIsShown()
     {
-        $this->withoutMiddleware();
         $city1 = factory(City::class)->create(['name'=>'Lviv']);
         $city2 = factory(City::class)->create(['name'=>'Kyiv']);
 
