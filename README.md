@@ -1,5 +1,4 @@
-
-#E-station API
+# E-station API
 
 This is a basic REST api for charging station service. I followed laravel structure so entire app is contained in `app` folder, test in `test` folder and docker instructions in `Dockerfile` and `docker-compose.yml` files.
 
